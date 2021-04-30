@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "RG\\": "app/"
+    }
+  },
+  "require": {
+    "pda/pheanstalk": "^4.0",
+    "symfony/dotenv": "^5.2",
+    "guzzlehttp/guzzle": "^7.0"
+  }
+
+}
