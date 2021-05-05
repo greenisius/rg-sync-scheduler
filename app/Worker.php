@@ -6,16 +6,20 @@ namespace RG;
 
 use Pheanstalk\Pheanstalk;
 use RG\Invoker;
+use RG\Log;
 
 class Worker
 {
     private $job;
     private $invoker;
     private $worker;
+    private $log;
 
     public function __construct()
     {
         $this->invoker = new Invoker();
+
+        $this->log = new Log();
 
         $this->worker = Pheanstalk::create($_ENV['QUERY_IP'], $_ENV['QUERY_PORT']);
 
@@ -39,6 +43,8 @@ class Worker
         $task = $this->task();
 
         $this->invoker->invoke($task);
+
+        $this->log->success($task);
 
         $this->worker->delete($this->job);
     }
