@@ -10,6 +10,7 @@ class Resource
     public $login;
     public $password;
     public $service;
+    public $period;
 
     public function __construct(array $data)
     {
@@ -17,5 +18,6 @@ class Resource
         $this->login = $data['login'];
         $this->password = $data['password'];
         $this->service = $data['service'];
+        $this->period = $data['period'];
     }
 }

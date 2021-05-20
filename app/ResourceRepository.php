@@ -16,9 +16,10 @@ class ResourceRepository
         $this->db = new \SQLite3($_ENV['DATABASE']);
     }
 
-    public function list(): array
+    public function list($argv = []): array
     {
-        $query = 'SELECT * from resource;';
+        $condition = $argv['1'] ? 'WHERE period = "' . $argv['1'] . '"' : '';
+        $query = 'SELECT * FROM resource ' . $condition . ';';
 
         $response = $this->db->query($query);
 

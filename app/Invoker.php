@@ -36,11 +36,23 @@ class Invoker
 
         try {
             $response = $this->client->post($url, $query);
-            return $response->getBody()->getContents();
+            
+            $content = $response->getBody()->getContents();
+
+            $this->checkError($content);
+
+            return $content;
 
         } catch (\Exception $e) {
             $this->log->fail($task);
             die();
+        }
+    }
+
+    private function checkError($content)
+    {
+        if ($error = json_decode($content, true)['error']) {
+            throw new \Exception($error);
         }
     }
 }
