@@ -45,7 +45,6 @@ class Invoker
 
         } catch (\Exception $e) {
             $this->log->fail($task);
-            die();
         }
     }
 

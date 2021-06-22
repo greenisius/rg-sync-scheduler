@@ -14,13 +14,13 @@ class Context
         switch ($resource->service) {
             case 'sync_meters':
             case 'sync_indications':
+            case 'sync_insurances':
+            case 'sync_arrears':
+            case 'sync_payments':
                 $context = new HouseCharger();
                 break;
-            case 'remind_appointments':
-                $context = new SimpleCharger();
-                break;
             default:
-                return;
+                $context = new SimpleCharger();
         }
 
         return $context->charge($resource);
