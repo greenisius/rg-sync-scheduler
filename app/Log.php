@@ -21,5 +21,6 @@ class Log
         $time = date('d.m.y H:i:s');
 
         file_put_contents($_ENV['LOG'], "$time: <ОШИБКА> для $task->url c параметрами $task->params\n", FILE_APPEND);
+        file_put_contents($_ENV['ERROR_LOG'], "$time: <ОШИБКА> для $task->url c параметрами $task->params\n<ТЕКСТ>: $task->error\n", FILE_APPEND);
     }
 }

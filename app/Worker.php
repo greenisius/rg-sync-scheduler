@@ -44,7 +44,9 @@ class Worker
 
         $this->invoker->invoke($task);
 
-        $this->log->success($task);
+        if($this->invoker->isSuccess()) {
+            $this->log->success($task);
+        }
 
         $this->worker->delete($this->job);
     }

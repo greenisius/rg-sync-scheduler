@@ -9,12 +9,16 @@ use RG\Log;
 
 class Invoker
 {
+    private $status;
+
     private $log;
 
     private $client;
 
     public function __construct()
     {
+        $this->status = true;
+
         $this->log = new Log();
 
         $this->client = new Client();
@@ -44,7 +48,9 @@ class Invoker
             return $content;
 
         } catch (\Exception $e) {
+            $task->error = $e->getMessage();
             $this->log->fail($task);
+            $this->status = false;
         }
     }
 
@@ -53,5 +59,10 @@ class Invoker
         if ($error = json_decode($content, true)['error']) {
             throw new \Exception($error);
         }
+    }
+
+    public function isSuccess()
+    {
+        return $this->status;
     }
 }

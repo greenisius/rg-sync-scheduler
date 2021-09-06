@@ -10,6 +10,7 @@ class Task
     public $login;
     public $password;
     public $params;
+    public $error;
 
     public function __construct(array $data)
     {
